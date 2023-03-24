@@ -1,0 +1,207 @@
+body {
+    background-color: #00CED1;
+}
+
+.content-wrapper {
+    display: grid;
+
+}
+
+#top-bar {
+    grid-area: header;
+    text-align: right;
+
+}
+
+ul {
+    list-style-type: none;
+}
+
+#cart-button {
+    float: right;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+#cart-button img {
+    height: 30px;
+    margin-right: 5px;
+}
+
+#cart-button:hover {
+    color: #fff;
+}
+
+#cart-button .cart-dropdown {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    width: 200px;
+    border-radius: 5px;
+    background-color: #0c5460;
+    color: #fff;
+    display: none;
+}
+
+#cart-button:hover .cart-dropdown {
+ display: block;
+}
+
+.cart-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    max-height: 200px;
+    overflow-y: auto;
+    width: 200px;
+    background-color: #0f8c8c;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    z-index: 1;
+}
+
+/* я додав заготовки на блоки, але ще не думав як буду стилізувати */
+#login-button {
+    margin-top: 5px;
+}
+
+#register-button {
+    margin-top: 5px;
+}
+
+
+#category-buttons {
+    grid-area: aside;
+    font-size: 20px;
+}
+
+.category-button {
+
+}
+
+#products {
+    grid-area: content;
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.product {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.product-name {
+
+}
+
+.product-image {
+
+}
+
+.product-price {
+
+}
+
+.buy-button {
+    background-color: #ffa500;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.buy-button:hover {
+    background-color: #ff8c00;
+}
+
+.footer {
+    grid-area: footer;
+    bottom: 0;
+    background-color: #383838;
+    color: #ddd;
+    margin-top: 570px;
+}
+
+.footer_left {
+    position: center;
+    width: 150px;
+    height: 50px;
+    float: left;
+}
+
+.footer_center {
+    width: 200px;
+    height: 50px;
+    float: left;
+    background-position: center top;
+    background-repeat: no-repeat;
+
+}
+
+.footer_right {
+    font-size: 17.8px;
+}
+
+#cart-button {
+    float: right;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+#cart-button img {
+}
+
+@media (min-width: 0px) {
+    .content-wrapper {
+        grid-template-columns:  1fr;
+        grid-template-rows: 100px 100px 100px auto 100px;
+        grid-template-areas:'header'
+                            'aside'
+                            'content'
+                            'footer';
+    }
+}
+
+@media (min-width: 350px) {
+    .footer {
+        margin-top: 250px;
+    }
+}
+
+@media (min-width: 601px) {
+    .content-wrapper {
+        grid-template-columns:  0.5fr 4fr;
+        grid-template-rows: 100px 100px auto 100px;
+        grid-template-areas:'header header'
+                            'aside content'
+                            'footer footer';
+    }
+
+}
+
+
+@media (min-width: 766px) {
+    .footer {
+        margin-top: 100px;
+    }
+}
