@@ -1,11 +1,53 @@
 @charset "UTF-8";
 body {
   background-color: #177e8e;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+html, body {
+  height: 95%;
+}
+
+.page-wrapper {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.content {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+footer {
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
 }
 
 .content-wrapper {
   display: -ms-grid;
   display: grid;
+}
+
+#store-name {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 72px;
+  color: #c0c0c0;
+  font-family: "Playfair Display", serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
 }
 
 #top-bar {
@@ -57,15 +99,30 @@ ul {
 .cart-dropdown {
   display: none;
   position: absolute;
-  top: 100%;
-  left: 0;
-  max-height: 200px;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  max-height: 400px;
   overflow-y: auto;
-  width: 200px;
+  width: 400px;
   background-color: #0f8c8c;
-  border: 1px solid #ccc;
   border-radius: 5px;
   z-index: 1;
+  border: 10px solid black; /* Зміна ширини рамки на 10px і чорного кольору */
+  color: white; /* Зміна кольору тексту на білий */
+  padding: 20px; /* Налаштування відступу всередині кошика */
+}
+
+.cart-dropdown.show {
+  display: block;
+}
+
+.empty-message {
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10px;
 }
 
 /* я додав заготовки на блоки, але ще не думав як буду стилізувати */
@@ -78,8 +135,35 @@ ul {
 }
 
 #category-buttons {
-  grid-area: aside;
-  font-size: 20px;
+  text-align: center;
+}
+
+.content_list {
+  list-style: none;
+  padding: 0;
+  display: inline-block;
+}
+
+.content_list li {
+  display: inline-block;
+}
+
+.category-button {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 5px;
+  background-color: #177e8e;
+  color: white;
+  border: 2px solid white;
+  border-radius: 30px; /* Значення радіусу ви можете змінити за своїм смаком */
+  font-size: 16px;
+  cursor: pointer;
+  height: 50px;
+  width: 150px; /* Фіксована ширина кнопок */
+}
+
+.category-button:hover {
+  background-color: #126d7a;
 }
 
 #products {
@@ -99,6 +183,9 @@ ul {
 }
 
 .product {
+  width: 250px;
+  height: 250px;
+  overflow: hidden;
   background-color: #fff;
   padding: 20px;
   margin: 20px;
@@ -116,6 +203,13 @@ ul {
       -ms-flex-align: center;
           align-items: center;
   text-align: center;
+}
+
+.product-image {
+  height: 150px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .buy-button {
@@ -202,10 +296,6 @@ ul {
     -ms-grid-row: 1;
     -ms-grid-column: 1;
   }
-  #category-buttons {
-    -ms-grid-row: 2;
-    -ms-grid-column: 1;
-  }
   #products {
     -ms-grid-row: 3;
     -ms-grid-column: 1;
@@ -217,7 +307,7 @@ ul {
 }
 @media (min-width: 350px) {
   .footer {
-    margin-top: 250px;
+    margin-top: 1900px;
     height: 260px;
   }
 }
@@ -230,18 +320,14 @@ ul {
   .content-wrapper {
     -ms-grid-columns: 0.5fr 4fr;
     grid-template-columns: 0.5fr 4fr;
-    -ms-grid-rows: 100px 100px auto 100px;
-    grid-template-rows: 100px 100px auto 100px;
+    -ms-grid-rows: 100px 100px auto;
+    grid-template-rows: 100px 100px auto;
         grid-template-areas: "header header" "aside content" "footer footer";
   }
   #top-bar {
     -ms-grid-row: 1;
     -ms-grid-column: 1;
     -ms-grid-column-span: 2;
-  }
-  #category-buttons {
-    -ms-grid-row: 2;
-    -ms-grid-column: 1;
   }
   #products {
     -ms-grid-row: 2;
@@ -258,9 +344,15 @@ ul {
     height: 140px;
   }
 }
-@media (min-width: 766px) {
+@media (min-width: 853px) {
   .footer {
-    margin-top: 100px;
+    margin-top: 920px;
+    height: 110px;
+  }
+}
+@media (min-width: 1183px) {
+  .footer {
+    margin-top: 620px;
     height: 110px;
   }
 }

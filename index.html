@@ -3,61 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Shop maked by Kostya Ponomarenko TA-03">
-    <title>SomeShop</title>
+    <title>СпортМайстер</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+
 <div class="content-wrapper">
+    <h1 id="store-name">Спортмайстер</h1>
     <div id="top-bar">
         <button id="login-button">Увійти</button>
-        <button id="register-button">Зарегеструватись</button>
+        <button id="register-button">Зареєструватись</button>
         <button id="cart-button">
             <img src="resources/cart.png" alt="Корзина">
+            <span id="cart-item-count">0</span>
         </button>
-        <!-- TODO: js щоб була корзина -->
-        <div class="cart-dropdown">
-            <ul>
-                <li>Товар 1</li>
-                <li>Товар 2</li>
-                <li>Товар 3</li>
+        <div id="cart-dropdown" class="cart-dropdown">
+            <ul id="cart-items-list">
+                <li class="empty-message">Кошик порожній</li>
             </ul>
+            <div id="cart-total">Загальна сума: 0 грн</div>
         </div>
     </div>
 
     <div id="category-buttons">
         <ul class="content_list">
-            <li><button class="category-button">Категорія товарів 1</button></li>
-            <li><button class="category-button">Категорія товарів 2</button></li>
-            <li><button class="category-button">Категорія товарів 3</button></li>
+            <li><button class="category-button">М'ячі</button></li>
+            <li><button class="category-button">Спортивне харчування</button></li>
+            <li><button class="category-button">Одяг</button></li>
         </ul>
     </div>
 
     <div id="products">
-        <div class="product">
-            <div class="product-name">Товар 1</div>
-            <div class="product-image"><!-- TODO: ще не додав, у процессі розробки =) --></div>
-            <div class="product-price">Ціна 50грн</div>
-            <button class="buy-button">Купити</button>
+        <div class="product" data-id="1" data-price="500" style="display: none;">
+            <div class="product-name">Футбольний м'яч</div>
+            <div class="product-image" style="background-image: url('resources/ball2.png');">
+            </div>
+            <div class="product-price">Ціна 500 грн</div>
+            <button class="buy-button">Додати до кошика</button>
         </div>
-        <div class="product">
-            <div class="product-name">Товар 2</div>
-            <div class="product-image"><!--TODO: ще не додав, у процессі розробки =)--></div>
-            <div class="product-price">Ціна 100грн </div>
-            <button class="buy-button">Купити</button>
+        <div class="product" data-id="2" data-price="300" style="display: none;">
+            <div class="product-name">Баскетбольний м'яч</div>
+            <div class="product-image" style="background-image: url('resources/ball1.png');">
+            </div>
+            <div class="product-price">Ціна 300 грн</div>
+            <button class="buy-button">Додати до кошика</button>
         </div>
-        <div class="product">
-            <div class="product-name">Товар 3</div>
-            <div class="product-image"><!-- TODO: ще не додав, у процессі розробки =) --></div>
-            <div class="product-price">Ціна 50грн</div>
-            <button class="buy-button">Купити</button>
+        <div class="product" data-id="3" data-price="200" style="display: none;">
+            <div class="product-name">Волейбольний м'яч</div>
+            <div class="product-image" style="background-image: url('resources/ball3.png');">
+            </div>
+            <div class="product-price">Ціна 200 грн</div>
+            <button class="buy-button">Додати до кошика</button>
         </div>
-        <div class="product">
-            <div class="product-name">Товар 4</div>
-            <div class="product-image"><!--TODO: ще не додав, у процессі розробки =)--></div>
-            <div class="product-price">Ціна 100грн </div>
-            <button class="buy-button">Купити</button>
+        <div class="product" data-id="4"data-price="100" style="display: none;">
+            <div class="product-name">Бейсбольний м'яч</div>
+            <div class="product-image" style="background-image: url('resources/ball4.png');">
+            </div>
+            <div class="product-price">Ціна 100 грн</div>
+            <button class="buy-button">Додати до кошика</button>
+        </div>
+        <div class="product" data-id="5" data-price="50" style="display: none;">
+            <div class="product-name">Енергетичний напій</div>
+            <div class="product-image" style="background-image: url('resources/food1.png');">
+            </div>
+            <div class="product-price">Ціна 50 грн</div>
+            <button class="buy-button">Додати до кошика</button>
+        </div>
+        <div class="product" data-id="6" data-price="80" style="display: none;">
+            <div class="product-name">Протеїн</div>
+            <div class="product-image" style="background-image: url('resources/food2.png');">
+            </div>
+            <div class="product-price">Ціна 80 грн</div>
+            <button class="buy-button">Додати до кошика</button>
+        </div>
+        <div class="product" data-id="7" data-price="70" style="display: none;">
+            <div class="product-name">Футболка</div>
+            <div class="product-image" style="background-image: url('resources/cloth1.png');">
+            </div>
+            <div class="product-price">Ціна 70 грн</div>
+            <button class="buy-button">Додати до кошика</button>
+        </div>
+        <div class="product" data-id="8" data-price="90" style="display: none;">
+            <div class="product-name">Шорти</div>
+            <div class="product-image" style="background-image: url('resources/cloth5.png');">
+            </div>
+            <div class="product-price">Ціна 90 грн</div>
+            <button class="buy-button">Додати до кошика</button>
+        </div>
+        <div class="product" data-id="9" data-price="150" style="display: none;">
+            <div class="product-name">Кросівки</div>
+            <div class="product-image" style="background-image: url('resources/cloth4.png');">
+            </div>
+            <div class="product-price">Ціна 150 грн</div>
+            <button class="buy-button">Додати до кошика</button>
+        </div>
+        <div class="product" data-id="10" data-price="30" style="display: none;">
+            <div class="product-name">Шапка</div>
+            <div class="product-image" style="background-image: url('resources/cloth3.png');">
+            </div>
+            <div class="product-price">Ціна 30 грн</div>
+            <button class="buy-button">Додати до кошика</button>
+        </div>
+        <div class="product" data-id="11" data-price="40" style="display: none;">
+            <div class="product-name">Рукавиці</div>
+            <div class="product-image" style="background-image: url('resources/cloth2.png');">
+            </div>
+            <div class="product-price">Ціна 40 грн</div>
+            <button class="buy-button">Додати до кошика</button>
+        </div>
+        <div class="product" data-id="12" data-price="200" style="display: none;">
+            <div class="product-name">Комплект для тренування</div>
+            <div class="product-image" style="background-image: url('resources/cloth6.png');">
+            </div>
+            <div class="product-price">Ціна 200 грн</div>
+            <button class="buy-button">Додати до кошика</button>
         </div>
     </div>
+
     <div class="footer">
         <div class="footer_left">
             <a href="https://github.com/smilekritik/Web_kpi" target="_blank" rel="nofollow"><img src="resources/github.png" alt=""></a>
@@ -73,9 +135,173 @@
             </p>
         </div>
     </div>
+
 </div>
 
+<script>
+    // Отримуємо елементи DOM
+    // Отримуємо елементи DOM
+    const buyButtons = document.querySelectorAll('.buy-button');
+    const cartTotal = document.getElementById('cart-total');
+    const cartButton = document.getElementById('cart-button');
+    const cartItemCount = document.getElementById('cart-item-count');
+    const cartDropdown = document.getElementById('cart-dropdown');
+    const cartItemsList = document.getElementById('cart-items-list');
+    const categoryButton1 = document.querySelector('#category-buttons .content_list li:nth-child(1) .category-button');
+    const categoryButton2 = document.querySelector('#category-buttons .content_list li:nth-child(2) .category-button');
+    const categoryButton3 = document.querySelector('#category-buttons .content_list li:nth-child(3) .category-button');
 
+    // Отримуємо елементи DOM для дивів з продуктами
+    const product1 = document.querySelector('#products .product:nth-child(1)');
+    const product2 = document.querySelector('#products .product:nth-child(2)');
+    const product3 = document.querySelector('#products .product:nth-child(3)');
+    const product4 = document.querySelector('#products .product:nth-child(4)');
+    const product5 = document.querySelector('#products .product:nth-child(5)');
+    const product6 = document.querySelector('#products .product:nth-child(6)');
+    const product7 = document.querySelector('#products .product:nth-child(7)');
+    const product8 = document.querySelector('#products .product:nth-child(8)');
+    const product9 = document.querySelector('#products .product:nth-child(9)');
+    const product10 = document.querySelector('#products .product:nth-child(10)');
+    const product11 = document.querySelector('#products .product:nth-child(11)');
+    const product12 = document.querySelector('#products .product:nth-child(12)');
+
+    // Ініціалізуємо пустий масив для зберігання товарів в кошику
+    let cartItems = [];
+
+    // Функція для додавання товару до кошика
+    function addToCart(productName, productId) {
+        const productElement = document.querySelector(`.product[data-id="${productId}"]`);
+        const productPrice = parseFloat(productElement.dataset.price);
+
+        cartItems.push({ name: productName, price: productPrice });
+        updateCart();
+    }
+
+
+    // Функція для видалення товару з кошика
+    function removeFromCart(productName) {
+        const index = cartItems.indexOf(productName);
+        if (index > -1) {
+            cartItems.splice(index, 1);
+        }
+        updateCart();
+    }
+
+
+    function updateCart() {
+        // Очищуємо список товарів у випадаючому меню кошика
+        cartItemsList.innerHTML = '';
+
+        // Додаємо кожен товар з кошика до списку
+        let total = 0; // Змінна для зберігання загальної суми
+        cartItems.forEach(item => {
+            const li = document.createElement('li');
+            li.textContent = `${item.name} - Ціна ${item.price} грн `;
+
+            total += item.price; // Додаємо ціну товару до загальної суми
+
+            const removeButton = document.createElement('button');
+            removeButton.textContent = '✕';
+            removeButton.classList.add('remove-button');
+            removeButton.addEventListener('click', () => removeFromCart(item));
+
+            li.appendChild(removeButton);
+            cartItemsList.appendChild(li);
+
+
+        });
+
+        // Перевіряємо, чи кошик порожній
+        if (cartItems.length === 0) {
+            const emptyMessage = document.createElement('li');
+            emptyMessage.textContent = 'Кошик порожній';
+            emptyMessage.classList.add('empty-message');
+            cartItemsList.appendChild(emptyMessage);
+        }
+
+        // Оновлюємо лічильник кількості товарів у кошику
+        cartItemCount.textContent = cartItems.length;
+
+        // Оновлюємо загальну суму
+        cartTotal.textContent = `Загальна сума: ${total} грн`;
+    }
+
+    // Додаємо обробник подій для кожної кнопки "Купити"
+    buyButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const productName = button.parentElement.querySelector('.product-name').textContent;
+            const productId = button.parentElement.getAttribute('data-id');
+            addToCart(productName, productId);
+        });
+    });
+
+    // Обробник події для кнопки кошика
+    cartButton.addEventListener('click', () => {
+        cartDropdown.classList.toggle('show');
+    });
+    function onPageLoad() {
+        product1.style.display = 'block';
+        product2.style.display = 'block';
+        product3.style.display = 'block';
+        product4.style.display = 'block';
+        product5.style.display = 'none';
+        product6.style.display = 'none';
+        product7.style.display = 'none';
+        product8.style.display = 'none';
+        product9.style.display = 'none';
+        product10.style.display = 'none';
+        product11.style.display = 'none';
+        product12.style.display = 'none';
+    }
+
+    window.addEventListener('load', onPageLoad);
+    // Обробник події для кнопки "Категорія товарів 1"
+    categoryButton1.addEventListener('click', () => {
+        product1.style.display = 'block';
+        product2.style.display = 'block';
+        product3.style.display = 'block';
+        product4.style.display = 'block';
+        product5.style.display = 'none';
+        product6.style.display = 'none';
+        product7.style.display = 'none';
+        product8.style.display = 'none';
+        product9.style.display = 'none';
+        product10.style.display = 'none';
+        product11.style.display = 'none';
+        product12.style.display = 'none';
+    });
+
+    // Обробник події для кнопки "Категорія товарів 2"
+    categoryButton2.addEventListener('click', () => {
+        product1.style.display = 'none';
+        product2.style.display = 'none';
+        product3.style.display = 'none';
+        product4.style.display = 'none';
+        product5.style.display = 'block';
+        product6.style.display = 'block';
+        product7.style.display = 'none';
+        product8.style.display = 'none';
+        product9.style.display = 'none';
+        product10.style.display = 'none';
+        product11.style.display = 'none';
+        product12.style.display = 'none';
+    });
+    // Обробник події для кнопки "Категорія товарів 2"
+    categoryButton3.addEventListener('click', () => {
+        product1.style.display = 'none';
+        product2.style.display = 'none';
+        product3.style.display = 'none';
+        product4.style.display = 'none';
+        product5.style.display = 'none';
+        product6.style.display = 'none';
+        product7.style.display = 'block';
+        product8.style.display = 'block';
+        product9.style.display = 'block';
+        product10.style.display = 'block';
+        product11.style.display = 'block';
+        product12.style.display = 'block';
+    });
+</script>
 
 </body>
 </html>
