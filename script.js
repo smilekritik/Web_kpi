@@ -8,38 +8,21 @@ const categoryButton1 = document.querySelector('#category-buttons .content_list 
 const categoryButton2 = document.querySelector('#category-buttons .content_list li:nth-child(2) .category-button');
 const categoryButton3 = document.querySelector('#category-buttons .content_list li:nth-child(3) .category-button');
 
-const product1 = document.querySelector('#products .product:nth-child(1)');
-const product2 = document.querySelector('#products .product:nth-child(2)');
-const product3 = document.querySelector('#products .product:nth-child(3)');
-const product4 = document.querySelector('#products .product:nth-child(4)');
-const product5 = document.querySelector('#products .product:nth-child(5)');
-const product6 = document.querySelector('#products .product:nth-child(6)');
-const product7 = document.querySelector('#products .product:nth-child(7)');
-const product8 = document.querySelector('#products .product:nth-child(8)');
-const product9 = document.querySelector('#products .product:nth-child(9)');
-const product10 = document.querySelector('#products .product:nth-child(10)');
-const product11 = document.querySelector('#products .product:nth-child(11)');
-const product12 = document.querySelector('#products .product:nth-child(12)');
-
+const productsContainer = document.getElementById('products');
 let cartItems = [];
 
-function addToCart(productName, productId) {
-    const productElement = document.querySelector(`.product[data-id="${productId}"]`);
-    const productPrice = parseFloat(productElement.dataset.price);
-
+function addToCart(productName, productId, productPrice) {
     cartItems.push({ name: productName, price: productPrice });
     updateCart();
 }
 
-
-function removeFromCart(productName) {
-    const index = cartItems.indexOf(productName);
+function removeFromCart(item) {
+    const index = cartItems.indexOf(item);
     if (index > -1) {
         cartItems.splice(index, 1);
     }
     updateCart();
 }
-
 
 function updateCart() {
     cartItemsList.innerHTML = '';
@@ -47,7 +30,7 @@ function updateCart() {
     let total = 0;
     cartItems.forEach(item => {
         const li = document.createElement('li');
-        li.textContent = `${item.name} - Ціна ${item.price} грн `;
+        li.textContent = `${item.name} - Ціна ${item.price} грн`;
 
         total += item.price;
 
@@ -58,8 +41,6 @@ function updateCart() {
 
         li.appendChild(removeButton);
         cartItemsList.appendChild(li);
-
-
     });
 
     if (cartItems.length === 0) {
@@ -70,77 +51,109 @@ function updateCart() {
     }
 
     cartItemCount.textContent = cartItems.length;
-
     cartTotal.textContent = `Загальна сума: ${total} грн`;
 }
 
-buyButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const productName = button.parentElement.querySelector('.product-name').textContent;
-        const productId = button.parentElement.getAttribute('data-id');
-        addToCart(productName, productId);
+// Завантажити JSON-файл зі списком товарів
+fetch("products.json")
+    .then(response => response.json())
+    .then(data => {
+        // Пройтися по кожному товару в списку
+        data.products.forEach(product => {
+            // Створити елемент товару
+            const productElement = document.createElement("div");
+            productElement.classList.add("product");
+            productElement.setAttribute("data-id", product.id);
+            productElement.setAttribute("data-price", product.price);
+            productElement.setAttribute("data-category", product.category);
+
+            // Додати назву товару
+            const nameElement = document.createElement("div");
+            nameElement.classList.add("product-name");
+            nameElement.textContent = product.name;
+            productElement.appendChild(nameElement);
+
+            // Додати зображення товару
+            const imageElement = document.createElement("div");
+            imageElement.classList.add("product-image");
+            imageElement.style.backgroundImage = `url('${product.image}')`;
+            productElement.appendChild(imageElement);
+
+            // Додати ціну товару
+            const priceElement = document.createElement("div");
+            priceElement.classList.add("product-price");
+            priceElement.textContent = `Ціна ${product.price} грн`;
+            productElement.appendChild(priceElement);
+
+            // Додати кнопку "Додати до кошика"
+            const buyButton = document.createElement("button");
+            buyButton.textContent = "Додати до кошика";
+            buyButton.classList.add("buy-button");
+            buyButton.addEventListener("click", () => {
+                const productName = productElement.querySelector(".product-name").textContent;
+                const productId = productElement.getAttribute("data-id");
+                const productPrice = parseFloat(productElement.getAttribute("data-price"));
+                addToCart(productName, productId, productPrice);
+            });
+            productElement.appendChild(buyButton);
+
+            // Додати товар до контейнера на сторінці
+            productsContainer.appendChild(productElement);
+        });
     });
-});
 
 cartButton.addEventListener('click', () => {
     cartDropdown.classList.toggle('show');
 });
-function onPageLoad() {
-    product1.style.display = 'block';
-    product2.style.display = 'block';
-    product3.style.display = 'block';
-    product4.style.display = 'block';
-    product5.style.display = 'none';
-    product6.style.display = 'none';
-    product7.style.display = 'none';
-    product8.style.display = 'none';
-    product9.style.display = 'none';
-    product10.style.display = 'none';
-    product11.style.display = 'none';
-    product12.style.display = 'none';
+
+async function onPageLoad() {
+    await fetch("products.json")
+        .then(response => response.json())
+        .then(data => {
+            data.products.forEach(product => {
+                const productElement = document.createElement("div");
+                // Решта коду для створення елемента товару
+                productsContainer.appendChild(productElement);
+            });
+        });
+
+    categoryButton1.click();
 }
 
 window.addEventListener('load', onPageLoad);
+
 categoryButton1.addEventListener('click', () => {
-    product1.style.display = 'block';
-    product2.style.display = 'block';
-    product3.style.display = 'block';
-    product4.style.display = 'block';
-    product5.style.display = 'none';
-    product6.style.display = 'none';
-    product7.style.display = 'none';
-    product8.style.display = 'none';
-    product9.style.display = 'none';
-    product10.style.display = 'none';
-    product11.style.display = 'none';
-    product12.style.display = 'none';
+    const allProducts = productsContainer.querySelectorAll('.product');
+    allProducts.forEach(product => {
+        product.style.display = 'none';
+    });
+
+    const categoryProducts = productsContainer.querySelectorAll('.product[data-category="1"]');
+    categoryProducts.forEach(product => {
+        product.style.display = 'block';
+    });
 });
 
 categoryButton2.addEventListener('click', () => {
-    product1.style.display = 'none';
-    product2.style.display = 'none';
-    product3.style.display = 'none';
-    product4.style.display = 'none';
-    product5.style.display = 'block';
-    product6.style.display = 'block';
-    product7.style.display = 'none';
-    product8.style.display = 'none';
-    product9.style.display = 'none';
-    product10.style.display = 'none';
-    product11.style.display = 'none';
-    product12.style.display = 'none';
+    const allProducts = productsContainer.querySelectorAll('.product');
+    allProducts.forEach(product => {
+        product.style.display = 'none';
+    });
+
+    const categoryProducts = productsContainer.querySelectorAll('.product[data-category="2"]');
+    categoryProducts.forEach(product => {
+        product.style.display = 'block';
+    });
 });
+
 categoryButton3.addEventListener('click', () => {
-    product1.style.display = 'none';
-    product2.style.display = 'none';
-    product3.style.display = 'none';
-    product4.style.display = 'none';
-    product5.style.display = 'none';
-    product6.style.display = 'none';
-    product7.style.display = 'block';
-    product8.style.display = 'block';
-    product9.style.display = 'block';
-    product10.style.display = 'block';
-    product11.style.display = 'block';
-    product12.style.display = 'block';
+    const allProducts = productsContainer.querySelectorAll('.product');
+    allProducts.forEach(product => {
+        product.style.display = 'none';
+    });
+
+    const categoryProducts = productsContainer.querySelectorAll('.product[data-category="3"]');
+    categoryProducts.forEach(product => {
+        product.style.display = 'block';
+    });
 });
